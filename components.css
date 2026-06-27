@@ -133,3 +133,34 @@ h1,h2,h3 {
 .nav-links a:hover {
     color: var(--color-primary);
 }
+
+/* Badge Component */
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.badge-primary {
+    background-color: var(--color-primary);
+    color: #fff;
+}
+
+.badge-secondary {
+    background-color: var(--color-surface);
+    color: var(--color-text);
+}
+
+.badge-success {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.badge-warning {
+    background-color: #ffc107;
+    color: #333;
+}
+
+
