@@ -192,3 +192,36 @@ h1,h2,h3 {
      outline: none;
      border-color: var(--color-primary);
 }
+
+/* — Alert Component — */
+.alert {
+    padding: 1rem 1.5rem;
+    border-radius: var(--radius);
+    border-left: 4px solid;
+    margin-bottom: 1rem;    
+    font-size: 0.95rem;
+}
+
+.alert-info {
+    background: #e8f4fd;
+    border-color: #3498db;
+    color: #1a5276;
+}
+
+.alert-success {
+    background: #eafaf1;
+    border-color: #28a745;
+    color: #1e5631 ;
+}
+
+.alert-warning {
+    background: #fef9e7;
+    border-color: #ffc107  ;
+    color: #7d6608;
+}
+
+.alert-error {
+    background: #fdedec;
+    border-color: #e74c3c;
+    color: #78281f;
+}
