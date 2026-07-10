@@ -38,7 +38,7 @@ h1,h2,h3 {
     
 }
 
-/* -- Button Component -- */
+/* — Button Component — */
 .btn {
     display: inline-block;
     padding: 0.75rem 1.5rem;
@@ -55,7 +55,7 @@ h1,h2,h3 {
     opacity: 0.85;
 }
 
-/* -- Variants -- */
+/* — Variants — */
 .btn-primary {
     background-color: var(--color-primary);
     color: #fff;
@@ -73,7 +73,7 @@ h1,h2,h3 {
     border: 2px solid var(--color-primary);
 }
 
-/* -- Card Component -- */
+/* — Card Component — */
 .card {
     background: var(--color-surface);
     border-radius: var(--radius);
@@ -92,7 +92,7 @@ h1,h2,h3 {
     font-size: 0.9rem;
 }
 
-/* -- Card Component -- */
+/* — Card Component — */
 .card {
     background: var(--color-surface);
     border-radius: var(--radius);
@@ -101,7 +101,7 @@ h1,h2,h3 {
     max-width: 300px;
 }
 
-/* -- Navigation Component -- */
+/* — Navigation Component — */
 .nav-bar {
     display:flex;
     align-items: center;
@@ -136,7 +136,7 @@ h1,h2,h3 {
     color: var(--color-primary);
 }
 
-/* -- Badge Component -- */
+/* — Badge Component — */
 .badge {
     display: inline-block;
     padding: 0.25rem 0.75rem;
@@ -165,7 +165,7 @@ h1,h2,h3 {
     color: #333;
 }
 
-/* -- Form Input Component -- */
+/* — Form Input Component — */
 .form-group {
     display: flex;
     flex-direction: column;
@@ -225,3 +225,24 @@ h1,h2,h3 {
     border-color: #e74c3c;
     color: #78281f;
 }
+
+/* — Progress Bar Component — */
+.progress {
+    width: 100%;
+    background: var(--color-surface);
+    border-radius: 50px;
+    height: 12px;
+    margin-bottom: 1rem;
+}
+
+.progress-bar {
+    height: 100%;
+    border-radius: 50px;
+    background: var(--color-primary);
+    transition: width 0.3s ease;
+}
+
+.progress-25 { width: 25%; } 
+.progress-50 { width: 50%; }
+.progress-75 { width: 75%; }
+.progress-100 { width: 100%; background: #28a745; } /* Green for complete */
