@@ -272,3 +272,32 @@ h1,h2,h3 {
     visibility: visible;
     opacity: 1;
 }
+
+/* — Table Component — */
+.table-wrapper{
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.table th {
+    background: var(--color-primary);
+    color: #fff;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--color-surface);
+    color: var(--color-text);
+}
+
+.table tr:hover td {
+    background: var(--color-surface);
+}
