@@ -301,3 +301,32 @@ h1,h2,h3 {
 .table tr:hover td {
     background: var(--color-surface);
 }
+
+/* — Breadcrumb Component — */
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    flex-wrap: wrap;
+}
+
+.breadcrumb-item {
+    color: var(--color-muted);
+    text-decoration: none;
+}
+
+.breadcrumb-item:hover {
+    color: var(--color-primary);
+    text-decoration: underline;
+}
+
+.breadcrumb-seperator::before {
+    color: var(--color-muted);
+}
+
+.breadcrumb-item.active {
+    color: var(--color-text);
+    font-weight: 600;
+    pointer-events: none;
+}
