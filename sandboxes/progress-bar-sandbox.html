@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Progress Bar Sandbox</title>
+  <link rel="stylesheet" href="../base.css">
+  <link rel="stylesheet" href="../components.css">
+</head>
+<body>
+    <h1>Progress Bar - JS Sandbox</h1>
+    <p>Testing the progress bar component</p>
+
+    <div class="progress">
+        <div class="progress-bar" id="myBar" style="width: 0%;"></div>
+    </div>
+
+    <button type="button" class="btn btn-primary" onclick="startProgress()">Start Progress</button>
+
+    <script>
+        function startProgress() {
+            let width = 0;
+            const progressBar = document.getElementById("myBar");
+            const interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    progressBar.style.background = '#28a745'; // Change color to green when complete
+                } else {
+                    width++;
+                    progressBar.style.width = width + "%";
+                }
+            }, 20);
+        }
+    </script>
+    
+</body>
+</html>
