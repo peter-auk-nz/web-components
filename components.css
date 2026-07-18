@@ -125,7 +125,7 @@ h1,h2,h3 {
     padding: 0;
 }
 
-.nav-links a{
+.nav-links a {
    color: var(--color-text);
    text-decoration: none;
    font-size: 0.95rem;
