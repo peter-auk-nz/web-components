@@ -116,7 +116,8 @@
             <label class="form-label" for="contact-message">Message</label>
             <textarea class="form-input" id="contact-message" rows="5" placeholder="Enter your message"></textarea>
         </div>
-            <button type="button" class="btn btn-primary">Send Message</button>
+            <button type="button" class="btn btn-primary" onclick="sendMessage()">Send Message</button>
+            <div id="form-feedback"></div>
         </form>
     </section>
 
@@ -125,6 +126,23 @@
         <p>&copy; 2026 Frankenstein Co. Built with the web components library.</p>
     </main>
     </section>
+    
+    <script>
+        // Send Message Button Function
+        function sendMessage() {
+            const name = document.getElementById('contact-name').value;
+            const email = document.getElementById('contact-email').value;
+        
 
+            if (name === '' || email === '') {
+               document.getElementById('form-feedback').innerHTML =
+                '<div class="alert alert-warning" role="alert">Please fill in all fields before sending your message.</div>';
+                document.getElementById('contact-email').classList.add('form-input-error');
+            } else {
+                document.getElementById('form-feedback').innerHTML = 
+                '<div class="alert alert-success" role="alert">Thank you ' + name + '! Your message has been sent.</div>';
+            }
+        }
+    </script>
 </body>
 </html>
