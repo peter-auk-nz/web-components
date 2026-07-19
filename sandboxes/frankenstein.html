@@ -85,9 +85,15 @@
 
     <!-- Alert Section -->
     <section class="component-section">
-        <div class="alert alert-info" role="alert">Your order ORD-002 is on its way!</div>
-        <div class="alert alert-warning" role="alert">Order ORD-001 has been delivered successfully.</div>
-        <div class="alert alert-danger" role="alert">Stock levels for Hi-Viz vests are running low.</div>
+        <div class="alert alert-info" role="alert">Your order ORD-002 is on its way!
+            <button onclick="closeAlert(this)" class="alert-close" aria-label="Close" style="float:right; background:none; cursor:pointer; font-size: 1rem;">&times;</button>
+        </div>
+        <div class="alert alert-warning" role="alert">Order ORD-001 has been delivered successfully.
+            <button onclick="closeAlert(this)" class="alert-close" aria-label="Close" style="float:right; background:none; cursor:pointer; font-size: 1rem;">&times;</button>
+        </div>
+        <div class="alert alert-danger" role="alert">Stock levels for Hi-Viz vests are running low.
+            <button onclick="closeAlert(this)" class="alert-close" aria-label="Close" style="float:right; background:none; cursor:pointer; font-size: 1rem;">&times;</button>
+        </div>
     </section>
 
     <section class="component-section">
@@ -143,6 +149,12 @@
                 '<div class="alert alert-success" role="alert">Thank you ' + name + '! Your message has been sent.</div>';
             }
         }
+
+        // Close Alert Function
+        function closeAlert(button) {
+            button.parentElement.remove();
+        }
+        
     </script>
 </body>
 </html>
