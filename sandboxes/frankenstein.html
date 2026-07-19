@@ -99,7 +99,7 @@
     <section class="component-section">
         <h2>Order Fulfillment</h2>
         <p>Daily target progress: <span id="daily-count">0</span>%</p>
-            <div class="progress"></div>
+            <div class="progress">
             <div class="progress-bar" id="daily-bar" 
                 role="progressbar"
                 aria-valuenow="0" 
@@ -107,17 +107,17 @@
                 aria-valuemax="100"
                 style="width: 0%;">
             </div>
-          
+        </div>  
         <p>Weekly target progress: <span id="weekly-count">0</span>%</p>
-            <div class="progress"></div>
-            <div class="progress" id="weekly-bar"
+            <div class="progress">
+            <div class="progress-bar" id="weekly-bar"
                 role="progressbar"
                 aria-valuenow="0" 
                 aria-valuemin="0" 
                 aria-valuemax="100"
                 style="width: 0%;">
             </div>
-        
+        </div>
         <button type="button" class="btn btn-primary" onclick="animateBars()">Update Progress</button>
     
     <!-- Contact Form -->
@@ -179,8 +179,8 @@
 
             // Small delay before starting animation to allow reset to be visible
             setTimeout(() => {
-                animateBar('daily-bar', 'daily-count', 75); // Animate daily bar to 75% over 1 second
-                animateBar('weekly-bar', 'weekly-count', 50); // Animate weekly bar to 50% over 1 second
+                animateBar('daily-bar', 'daily-count', 50); // Animate daily bar to 50% over 1 second
+                animateBar('weekly-bar', 'weekly-count', 25); // Animate weekly bar to 25% over 1 second
             }, 100); // 100ms delay
         }
 
@@ -196,7 +196,7 @@
                     bar.style.width = current + '%';
                     count.textContent = current;
                 }
-            }, 20); // Adjust the speed of the animation here
+            }, 90); // Adjust the speed of the animation here
                     
         }
            
