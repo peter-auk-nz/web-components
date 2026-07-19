@@ -98,14 +98,27 @@
 
     <section class="component-section">
         <h2>Order Fulfillment</h2>
-        <p>Daily target progress:</p>
-        <div class="progress">
-            <div class="progress-bar progress-75"></div>
-        </div>
-        <p>Weekly target progress:</p>
-        <div class="progress">
-            <div class="progress-bar progress-50"></div>
-        </div>
+        <p>Daily target progress: <span id="daily-count">0</span>%</p>
+            <div class="progress"></div>
+            <div class="progress-bar" id="daily-bar" 
+                role="progressbar"
+                aria-valuenow="0" 
+                aria-valuemin="0" 
+                aria-valuemax="100"
+                style="width: 0%;">
+            </div>
+          
+        <p>Weekly target progress: <span id="weekly-count">0</span>%</p>
+            <div class="progress"></div>
+            <div class="progress" id="weekly-bar"
+                role="progressbar"
+                aria-valuenow="0" 
+                aria-valuemin="0" 
+                aria-valuemax="100"
+                style="width: 0%;">
+            </div>
+        
+        <button type="button" class="btn btn-primary" onclick="animateBars()">Update Progress</button>
     
     <!-- Contact Form -->
     <section class="component-section">
@@ -154,7 +167,40 @@
         function closeAlert(button) {
             button.parentElement.remove();
         }
-        
+
+        // Animate Progress Bars Function
+        function 
+            animateBars() {
+        // Reset bars before animating
+            document.getElementById('daily-bar').style.width = '0%';
+            document.getElementById('weekly-bar').style.width = '0%';
+            document.getElementById('daily-count').textContent = '0';
+            document.getElementById('weekly-count').textContent = '0';
+
+            // Small delay before starting animation to allow reset to be visible
+            setTimeout(() => {
+                animateBar('daily-bar', 'daily-count', 75); // Animate daily bar to 75% over 1 second
+                animateBar('weekly-bar', 'weekly-count', 50); // Animate weekly bar to 50% over 1 second
+            }, 100); // 100ms delay
+        }
+
+        function animateBar(barId, countId, target) {
+            let current = 0;
+            const bar = document.getElementById(barId);
+            const count = document.getElementById(countId);
+            const interval = setInterval(() => {
+                if (current >= target) {
+                    clearInterval(interval);
+                } else {
+                    current++;
+                    bar.style.width = current + '%';
+                    count.textContent = current;
+                }
+            }, 20); // Adjust the speed of the animation here
+                    
+        }
+           
+
     </script>
 </body>
 </html>
