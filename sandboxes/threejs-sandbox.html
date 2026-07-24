@@ -32,15 +32,24 @@
         const cube = new THREE.Mesh(geometry, material);
         scene.add(cube);
 
+        // Create a sphere
+        const sphereGeometry = new THREE.SphereGeometry(0.5, 32, 32);
+        const sphereMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff88, wireframe: true });
+        const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+        sphere.position.set(2, 0, 0); // Position the sphere to the right of the cube
+        scene.add(sphere);
+
         // 5. Animation loop (rotate the cube and render the scene)
         function animate() {
             requestAnimationFrame(animate);
 
             // Rotate the cube for some basic animation
-            cube.rotation.x += 0.01;
-            cube.rotation.y += 0.05;
-            cube.rotation.z += 0.02;
-
+            cube.rotation.x += 0.001;
+            cube.rotation.y += 0.005;
+            cube.rotation.z += 0.002;
+            sphere.rotation.x += 0.05;
+            sphere.rotation.y += 0.01;
+            sphere.rotation.z += 0.02;
             renderer.render(scene, camera);
         }
 
