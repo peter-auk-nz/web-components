@@ -76,6 +76,12 @@
         sphere.position.set(2, 0, 0); // Position the sphere to the right of the cube
         scene.add(sphere);
 
+        // Moon sphere
+        const moonGeometry = new THREE.SphereGeometry(0.27, 32, 32);
+        const moonMaterial = new THREE.MeshStandardMaterial({ color: 0xaaaaaa });
+        const moon = new THREE.Mesh(moonGeometry, moonMaterial);
+        scene.add(moon);
+
         // 5. Animation loop (rotate the cube and render the scene)
         function animate() {
             requestAnimationFrame(animate);
@@ -88,6 +94,9 @@
         sphere.rotation.y += 0.05;
         sphere.rotation.z += 0.02;
         starField.rotation.y += 0.0002; // Slowly rotate the starfield for a dynamic background
+        const time = Date.now() * 0.001; // Time in seconds
+        moon.position.x = sphere.position.x + Math.cos(time) * 1.5; // Orbit around the sphere
+        moon.position.z = sphere.position.z + Math.sin(time) * 1.5;
         renderer.render(scene, camera);
         }
 
