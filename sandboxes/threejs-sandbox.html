@@ -84,9 +84,10 @@
         cube.rotation.x += 0.001;
         cube.rotation.y += 0.005;
         cube.rotation.z += 0.002;
-        sphere.rotation.x += 0.001;
-        sphere.rotation.y += 0.005;
-        sphere.rotation.z += 0.002;
+        sphere.rotation.x += 0.01;
+        sphere.rotation.y += 0.05;
+        sphere.rotation.z += 0.02;
+        starField.rotation.y += 0.0002; // Slowly rotate the starfield for a dynamic background
         renderer.render(scene, camera);
         }
 
