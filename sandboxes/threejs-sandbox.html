@@ -49,6 +49,35 @@
         const starField = new THREE.Points(starGeometry, starMaterial);
         scene.add(starField);
 
+        // The Sun
+        const sunGeometry = new THREE.SphereGeometry(1.5, 32, 32);
+        const sunMaterial = new THREE.MeshBasicMaterial({ 
+            color: 0xffa500,
+            emissive: 0xffa500,
+            emissiveIntensity: 1
+        });
+        const sun = new THREE.Mesh(sunGeometry, sunMaterial);
+        scene.add(sun);
+
+        // Sunlight
+        const sunLight = new THREE.PointLight(0xffa500, 2, 100);
+        sun.position.set(-8, 2, -8);
+        sunLight.position.set(-8, 2, -8);
+        scene.add(sunLight);
+        // Sun Corona (glowing outer layer)
+        const coronaGeometry = new THREE.SphereGeometry(1.8, 32, 32);
+        const coronaMaterial = new THREE.MeshBasicMaterial({
+            color: 0xff6600,
+            emissive: 0xff4400,
+            emissiveIntensity: 0.5,
+            transparent: true,
+            opacity: 0.3
+        });
+
+        const corona = new THREE.Mesh(coronaGeometry, coronaMaterial);
+        corona.position.set(-8, 2, -8);
+        scene.add(corona);
+
         // 3. Create a renderer (the engine that draws the scene)
         const renderer = new THREE.WebGLRenderer();
         renderer.setSize(window.innerWidth, window.innerHeight);
@@ -59,7 +88,7 @@
         controls.dampingFactor = 0.05;
 
         // 4. Create a mesh (geometry + material) and add it to the scene
-        const geometry = new THREE.DodecahedronGeometry(0.8, 0); // Create a dodecahedron geometry
+        const geometry = new THREE.DodecahedronGeometry(0.4, 0); // Create a dodecahedron geometry
         const material = new THREE.MeshStandardMaterial({ 
             color: 0x8b7355,
             roughness: 1,
@@ -96,9 +125,9 @@
         cube.rotation.x += 0.001;
         cube.rotation.y += 0.005;
         cube.rotation.z += 0.002;
-        sphere.rotation.x += 0.01;
-        sphere.rotation.y += 0.05;
-        sphere.rotation.z += 0.02;
+        sphere.rotation.x += 0.001;
+        sphere.rotation.y += 0.005;
+        sphere.rotation.z += 0.002;
         starField.rotation.y += 0.0002; // Slowly rotate the starfield for a dynamic background
         const time = Date.now() * 0.001; // Time in seconds
         moon.position.x = sphere.position.x + Math.cos(time) * 1.5; // Orbit around the sphere
