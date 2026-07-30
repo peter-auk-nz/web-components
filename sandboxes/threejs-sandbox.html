@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -59,9 +59,15 @@
         controls.dampingFactor = 0.05;
 
         // 4. Create a mesh (geometry + material) and add it to the scene
-        const geometry = new THREE.BoxGeometry(2, 1, 1);
-        const material = new THREE.MeshStandardMaterial({ color: 0xff0088 });
+        const geometry = new THREE.DodecahedronGeometry(0.8, 0); // Create a dodecahedron geometry
+        const material = new THREE.MeshStandardMaterial({ 
+            color: 0x8b7355,
+            roughness: 1,
+            metalness: 0
+        });
+
         const cube = new THREE.Mesh(geometry, material);
+        cube.position.set(-2, 0.5, 0);
         scene.add(cube);
 
         // Create a sphere
