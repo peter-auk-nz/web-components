@@ -151,6 +151,8 @@
         const time = Date.now() * 0.001; // Time in seconds
         moon.position.x = sphere.position.x + Math.cos(time) * 1.5; // Orbit around the sphere
         moon.position.z = sphere.position.z + Math.sin(time) * 1.5;
+        saturn.rotation.y += 0.005; // Slowly rotate Saturn
+        rings.rotation.y += 0.002; // Slowly rotate Saturn's rings
         renderer.render(scene, camera);
         }
 
