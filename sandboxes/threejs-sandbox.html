@@ -117,6 +117,25 @@
         const moon = new THREE.Mesh(moonGeometry, moonMaterial);
         scene.add(moon);
 
+        // Saturn with rings
+        const saturnGeometry = new THREE.SphereGeometry(0.8, 32, 32);
+        const saturnMaterial = new THREE.MeshStandardMaterial({ color: 0xc8aa96e });
+        const saturn = new THREE.Mesh(saturnGeometry, saturnMaterial);
+        saturn.position.set(5, 0, -2);
+        scene.add(saturn);
+
+        // Saturn's rings
+        const ringGeometry = new THREE.TorusGeometry(1.4, 0.2, 2, 64);
+        const ringMaterial = new THREE.MeshStandardMaterial({ 
+            color: 0xa0784a, 
+            side: THREE.DoubleSide 
+        });
+        
+        const rings = new THREE.Mesh(ringGeometry, ringMaterial);
+        rings.position.set(5, 0, -2);
+        rings.rotation.x = Math.PI / 3;
+        scene.add(rings);
+
         // 5. Animation loop (rotate the cube and render the scene)
         function animate() {
             requestAnimationFrame(animate);
