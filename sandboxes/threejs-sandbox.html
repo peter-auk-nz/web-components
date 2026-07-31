@@ -130,7 +130,15 @@
             color: 0xa0784a, 
             side: THREE.DoubleSide 
         });
-        
+
+        // Jupiter
+        const jupiterGeometry = new THREE.SphereGeometry(1.2, 32, 32);
+        const jupiterMaterial = new THREE.MeshStandardMaterial({ color: 0xc88b38a });
+        const jupiter = new THREE.Mesh(jupiterGeometry, jupiterMaterial);
+        jupiter.position.set(3, 0, -1);
+        scene.add(jupiter);
+
+        // Saturn's rings
         const rings = new THREE.Mesh(ringGeometry, ringMaterial);
         rings.position.set(5, 0, -2);
         rings.rotation.x = Math.PI / 3;
@@ -153,6 +161,8 @@
         moon.position.z = sphere.position.z + Math.sin(time) * 1.5;
         saturn.rotation.y += 0.005; // Slowly rotate Saturn
         rings.rotation.y += 0.002; // Slowly rotate Saturn's rings
+        jupiter.rotation.y += 0.008; // Slowly rotate Jupiter
+        
         renderer.render(scene, camera);
         }
 
