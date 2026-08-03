@@ -82,6 +82,30 @@
         smile.rotation.z = Math.PI;
         robot.add(smile);
 
+        // Chest panel - a small rectangle on the body
+        const panelGeometry = new THREE.BoxGeometry(0.4, 0.3, 0.05);
+        const panelMaterial = new THREE.MeshStandardMaterial({ 
+            color: 0x1a5276,
+            roughness: 0.3,
+            metalness: 0.5
+        });
+        const panel = new THREE.Mesh(panelGeometry, panelMaterial);
+        panel.position.set(0, 0.95, 0.63); // Position the panel on the front of the body
+        robot.add(panel);
+
+        // Glowing button on chest panel
+        const buttonGeometry = new THREE.SphereGeometry(0.05, 16, 16);
+        const buttonMaterial = new THREE.MeshStandardMaterial({ 
+            color: 0x00ff88,
+            emissive: 0x00ff88,
+            emissiveIntensity: 0.8,
+            roughness: 0.2,
+            metalness: 0.5
+        });
+        const button = new THREE.Mesh(buttonGeometry, buttonMaterial);
+        button.position.set(0, 0.95, 0.66 ); // Position the button on the panel
+        robot.add(button);
+
         // Antenna
         const antennaStem = new THREE.Mesh(
             new THREE.CylinderGeometry(0.02, 0.02, 0.3, 8), 
