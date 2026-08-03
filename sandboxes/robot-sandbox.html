@@ -55,23 +55,23 @@
         const bodyGeometry = new THREE.SphereGeometry(0.7, 32, 32);
         const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
         body.scale.set(1, 1.5, 0.9); // Squash the sphere to make it more oval-shaped
-        body.position.set(0, 0.9, 0); // Raise the body above the ground
+        body.position.set(0, 1.3, 0); // Raise the body above the ground
         robot.add(body);
 
         // 6. Head - a smaller sphere on top of the body
         const headGeometry = new THREE.SphereGeometry(0.5, 32, 32);
         const head = new THREE.Mesh(headGeometry, headMaterial);
-        head.position.set(0, 1.85, 0); // Position the head above the body
+        head.position.set(0, 2.25, 0); // Position the head above the body
         robot.add(head);
 
         // 7. Eyes - two small spheres on the head
         const eyeGeometry = new THREE.SphereGeometry(0.08, 16, 16);
         const leftEye = new THREE.Mesh(eyeGeometry, eyeMaterial);
-        leftEye.position.set(-0.18, 1.9, 0.44 ); // Make the eyes smaller
+        leftEye.position.set(-0.18, 2.3, 0.44 ); // Make the eyes smaller
         robot.add(leftEye);
 
         const rightEye = new THREE.Mesh(eyeGeometry, eyeMaterial);
-        rightEye.position.set(0.18, 1.9, 0.44); // Make the eyes smaller
+        rightEye.position.set(0.18, 2.3, 0.44); // Make the eyes smaller
         robot.add(rightEye);
 
         // Antenna
@@ -79,14 +79,14 @@
             new THREE.CylinderGeometry(0.02, 0.02, 0.3, 8), 
             limbMaterial
         );
-        antennaStem.position.set(0, 2.35, 0);
+        antennaStem.position.set(0, 2.75, 0);
         robot.add(antennaStem);
        
         const antennaTip = new THREE.Mesh(
             new THREE.SphereGeometry(0.07, 16, 16), 
             accentMaterial
         );
-        antennaTip.position.set(0, 2.5, 0);
+        antennaTip.position.set(0, 2.9, 0);
         robot.add(antennaTip);
 
         // 8. Arms - shoulder joint + cylinder arm + hand
@@ -107,7 +107,7 @@
             hand.position.set(0, -0.58, 0);
             arm.add(hand);
 
-            arm.position.set(xSide * 0.78, 1.05, 0); // Position the arm on the side of the body
+            arm.position.set(xSide * 0.78, 1.45, 0); // Position the arm on the side of the body
             return arm;
         }
 
@@ -129,10 +129,10 @@
             const foot = new THREE.Mesh(
                 new THREE.SphereGeometry(0.15, 16, 16), accentMaterial);
             foot.scale.set(1.2, 0.6, 1.4); // Slightly forward for a natural stance;
-            foot.position.set(0, -0.3, 0.8); // Position the foot below the leg
+            foot.position.set(0, -0.3, 0.08); // Position the foot below the leg
             leg.add(foot);
 
-            leg.position.set(xSide * 0.28, 0.25, 0); // Position the leg on the side of the body
+            leg.position.set(xSide * 0.28, 0.3, 0); // Position the leg on the side of the body
             return leg;
         }
 
