@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robot Sandbox</title>
+    <style>
+        body { margin: 0; background: #1a1a2e; }
+        canvas { display: block; }
+    </style>
+</head>
+<body>
+    <!-- Three.js loaded from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
+    <script>
+        // 1. Create the scene (the empty 3D world)
+        const scene = new THREE.Scene();
+
+        // 2. Create a camera (the viewpoint)
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(0, 1, 5);
+
+        // Add ambient light to the scene (general background light)
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        scene.add(ambientLight);
+
+        // Add directional light to the scene (like the sun)
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        directionalLight.position.set(5, 10, 7);
+        scene.add(directionalLight);
+        
+        // 3. Create a renderer (the engine that draws the scene)
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true; // Enable smooth camera movement
+        controls.dampingFactor = 0.05; // Damping factor for smoothness
+        controls.target.set(0, 1, 0); // Set the target to look at the robot's head
+
+        // 4. Build the robot as a group so it moves?rotates as one unit
+        const robot = new THREE.Group();
+
+        // Materials (soft, friendly palette)
+        const bodyMaterial = new THREE.MeshStandardMaterial({ color: 0x5dade2, roughness: 0.5, metalness: 0.2 });
+        const headMaterial = new THREE.MeshStandardMaterial({ color: 0x85c1e9, roughness: 0.5, metalness: 0.2 });
+        const limbMaterial = new THREE.MeshStandardMaterial({ color: 0x3498db, roughness: 0.4, metalness: 0.3 });
+        const accentMaterial = new THREE.MeshStandardMaterial({ color: 0xf4d03f, roughness: 0.3, metalness: 0.5 });
+        const eyeMaterial = new THREE.MeshStandardMaterial({ color: 0x2c3e50, roughness: 0.2,});
+
+        // 5.Body - rounded, made from a squashed sphere
+        const bodyGeometry = new THREE.SphereGeometry(0.7, 32, 32);
+        const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
+        body.scale.set(1, 1.5, 0.9); // Squash the sphere to make it more oval-shaped
+        body.position.set(0, 0.9, 0); // Raise the body above the ground
+        robot.add(body);
+
+        // 6. Head - a smaller sphere on top of the body
+        const headGeometry = new THREE.SphereGeometry(0.5, 32, 32);
+        const head = new THREE.Mesh(headGeometry, headMaterial);
+        head.position.set(0, 1.85, 0); // Position the head above the body
+        robot.add(head);
+
+        // 7. Eyes - two small spheres on the head
+        const eyeGeometry = new THREE.SphereGeometry(0.08, 16, 16);
+        const leftEye = new THREE.Mesh(eyeGeometry, eyeMaterial);
+        leftEye.position.set(-0.18, 1.9, 0.44 ); // Make the eyes smaller
+        robot.add(leftEye);
+
+        const rightEye = new THREE.Mesh(eyeGeometry, eyeMaterial);
+        rightEye.position.set(0.18, 1.9, 0.44); // Make the eyes smaller
+        robot.add(rightEye);
+
+        // Antenna
+        const antennaStem = new THREE.Mesh(
+            new THREE.CylinderGeometry(0.02, 0.02, 0.3, 8), 
+            limbMaterial
+        );
+        antennaStem.position.set(0, 2.35, 0);
+        robot.add(antennaStem);
+       
+        const antennaTip = new THREE.Mesh(
+            new THREE.SphereGeometry(0.07, 16, 16), 
+            accentMaterial
+        );
+        antennaTip.position.set(0, 2.5, 0);
+        robot.add(antennaTip);
+
+        // 8. Arms - shoulder joint + cylinder arm + hand
+        function createArm(xSide) {
+            const arm = new THREE.Group();
+
+            const shoulder = new THREE.Mesh(new THREE.SphereGeometry(0.15, 16, 16), limbMaterial);
+            arm.add(shoulder);
+
+            const upperArm = new THREE.Mesh(
+                new THREE.CylinderGeometry(0.09, 0.09, 0.5, 16), 
+                limbMaterial
+            );
+            upperArm.position.set(0, -0.28, 0);
+            arm.add(upperArm);
+            
+            const hand = new THREE.Mesh(new THREE.SphereGeometry(0.13, 16, 16), accentMaterial);
+            hand.position.set(0, -0.58, 0);
+            arm.add(hand);
+
+            arm.position.set(xSide * 0.78, 1.05, 0); // Position the arm on the side of the body
+            return arm;
+        }
+
+        const leftArm = createArm(-1);
+        const rightArm = createArm(1);
+        robot.add(leftArm);
+        robot.add(rightArm);
+
+        // 9. Legs - cylinder leg + rounded foot
+        function createLeg(xSide) {
+            const leg = new THREE.Group();
+
+            const upperLeg = new THREE.Mesh(
+                new THREE.CylinderGeometry(0.11, 0.11, 0.5, 16), 
+                limbMaterial
+            );
+            leg.add(upperLeg);
+
+            const foot = new THREE.Mesh(
+                new THREE.SphereGeometry(0.15, 16, 16), accentMaterial);
+            foot.scale.set(1.2, 0.6, 1.4); // Slightly forward for a natural stance;
+            foot.position.set(0, -0.3, 0.8); // Position the foot below the leg
+            leg.add(foot);
+
+            leg.position.set(xSide * 0.28, 0.25, 0); // Position the leg on the side of the body
+            return leg;
+        }
+
+        const leftLeg = createLeg(-1);
+        const rightLeg = createLeg(1);
+        robot.add(leftLeg);
+        robot.add(rightLeg);
+
+        // Add the robot to the scene
+        scene.add(robot);
+
+        // 10. Soft ground plane so the robot doesn't float in empty space
+        const groundGeometry = new THREE.CircleGeometry(4, 32);
+        const groundMaterial = new THREE.MeshStandardMaterial({ color: 0x2c3e50, roughness: 0.9 });
+        const ground = new THREE.Mesh(groundGeometry, groundMaterial);
+        ground.rotation.x = -Math.PI / 2;
+        scene.add(ground);
+
+        // 11. Animation loop - gentle idle bob + slow turn, plus waving right arm
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update(); // Update controls for damping
+
+            const time = Date.now() * 0.001; // Time in seconds
+
+            // Gentle idle bobbing motion
+            robot.position.y = Math.sin(time * 1.5) * 0.05; // Bob up and down
+            
+            // Slow friendly rotation of the robot
+            robot.rotation.y = Math.sin(time * 0.4) * 0.3; // Slight rotation back and forth
+
+            // Waving right arm
+            rightArm.rotation.z = 0.3 + Math.sin(time * 3) * 0.4; // Wave back and forth
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>
