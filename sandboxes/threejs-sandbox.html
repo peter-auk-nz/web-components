@@ -154,6 +154,33 @@
         cosmosHead.position.set(0, 0.5, 0);
         cosmos.add(cosmosHead);
 
+        // Cosmos eyes
+        const eyeGeometry = new THREE.SphereGeometry(0.03, 8, 8);
+        const eyeMaterial = new THREE.MeshStandardMaterial({ color: 0x2c3e50 });
+        
+        const leftEye = new THREE.Mesh(eyeGeometry, eyeMaterial);
+        leftEye.position.set(-0.07, 0.52, 0.18);
+        cosmos.add(leftEye);
+
+        const rightEye = new THREE.Mesh(eyeGeometry, eyeMaterial);
+        rightEye.position.set(0.07, 0.52, 0.18);
+        cosmos.add(rightEye);
+
+        // Cosmos antenna
+        const antennaStem = new THREE.Mesh(
+            new THREE.CylinderGeometry(0.008, 0.008, 0.12, 8),
+            new THREE.MeshStandardMaterial({ color: 0xf4d03f })
+        );
+        antennaStem.position.set(0, 0.72, 0);
+        cosmos.add(antennaStem);
+
+        const antennaTip = new THREE.Mesh(
+            new THREE.SphereGeometry(0.03, 8, 8),
+            new THREE.MeshStandardMaterial({ color: 0xf4d03f })
+        );
+        antennaTip.position.set(0, 0.80, 0);
+        cosmos.add(antennaTip);
+
         cosmos.position.set(0, 0.5, 0);
         scene.add(cosmos);
 
