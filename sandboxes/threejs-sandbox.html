@@ -138,6 +138,25 @@
         jupiter.position.set(-4, 0, -2);
         scene.add(jupiter);
 
+        // Cosmos - our friendly space robot!
+        const cosmos = new THREE.Group();
+        const cosmosBody = new THREE.Mesh(
+            new THREE.SphereGeometry(0.3, 32, 32),
+            new THREE.MeshStandardMaterial({ color: 0x5dade2,})
+        );
+        cosmosBody.scale.set(1, 1.5, 0.9);
+        cosmos.add(cosmosBody);
+
+        const cosmosHead = new THREE.Mesh(
+            new THREE.SphereGeometry(0.2, 32, 32),
+            new THREE.MeshStandardMaterial({ color: 0x85c1e9})
+        );
+        cosmosHead.position.set(0, 0.5, 0);
+        cosmos.add(cosmosHead);
+
+        cosmos.position.set(0, 0.5, 0);
+        scene.add(cosmos);
+
         // Saturn's rings
         const rings = new THREE.Mesh(ringGeometry, ringMaterial);
         rings.position.set(5, 0, -2);
@@ -162,6 +181,8 @@
         saturn.rotation.y += 0.005; // Slowly rotate Saturn
         rings.rotation.y += 0.002; // Slowly rotate Saturn's rings
         jupiter.rotation.y += 0.008; // Slowly rotate Jupiter
+        cosmos.rotation.y += 0.005; // Slowly rotate the friendly robot
+        cosmos.position.x = 0.002 + Math.sin(time * 2) * 0.1; // Gentle bobbing motion for the robot
         
         renderer.render(scene, camera);
         }
