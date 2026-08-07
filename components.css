@@ -84,7 +84,6 @@ h1,h2,h3 {
 .cards-container {
         display: flex;
         gap: 1rem;
-        flex-wrap: wrap;
         column-rule: 2px solid #667eea;
 }
 
