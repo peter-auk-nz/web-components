@@ -133,7 +133,8 @@
 
         // Jupiter
         const jupiterGeometry = new THREE.SphereGeometry(1.2, 32, 32);
-        const jupiterMaterial = new THREE.MeshStandardMaterial({ color: 0xc88b38a });
+        const jupiterTexture = textureLoader.load('textures/preview_jupiter.jpg');
+        const jupiterMaterial = new THREE.MeshStandardMaterial({ map: jupiterTexture });
         const jupiter = new THREE.Mesh(jupiterGeometry, jupiterMaterial);
         jupiter.position.set(-4, 0, -2);
         scene.add(jupiter);
