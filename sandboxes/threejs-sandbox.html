@@ -132,6 +132,22 @@
             side: THREE.DoubleSide 
         });
 
+        // Mercury
+        const mercuryGeometry = new THREE.SphereGeometry(0.3, 32, 32);
+        const mercuryTexture = textureLoader.load('textures/preview_mercury.jpg');
+        const mercuryMaterial = new THREE.MeshStandardMaterial({ map: mercuryTexture });
+        const mercury = new THREE.Mesh(mercuryGeometry, mercuryMaterial);
+        mercury.position.set(-5, 0.5, -4);
+        scene.add(mercury);
+
+        // Venus
+        const venusGeometry = new THREE.SphereGeometry(0.9, 32, 32);
+        const venusTexture = textureLoader.load('textures/preview_venus_surface.jpg');
+        const venusMaterial = new THREE.MeshStandardMaterial({ map: venusTexture});
+        const venus = new THREE.Mesh(venusGeometry, venusMaterial);
+        venus.position.set(-1, 0, 2);
+        scene.add(venus);
+
         // Jupiter
         const jupiterGeometry = new THREE.SphereGeometry(1.2, 32, 32);
         const jupiterTexture = textureLoader.load('textures/preview_jupiter.jpg');
@@ -254,6 +270,8 @@
         saturn.rotation.y += 0.015; // Slowly rotate Saturn
         rings.rotation.x = Math.PI / 4;
         rings.rotation.z += 0.015; // Slowly rotate Saturn's rings
+        mercury.rotation.y += 0.001;
+        venus.rotation.y -= 0.002 // Note the minus - Venus rotate backwards
         jupiter.rotation.y += 0.008; // Slowly rotate Jupiter
         cosmos.rotation.y += 0.005; // Slowly rotate the friendly robot
         cosmos.position.x = 0.002 + Math.sin(time * 2) * 0.1; // Gentle bobbing motion for the robot
