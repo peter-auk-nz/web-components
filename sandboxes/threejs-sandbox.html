@@ -119,7 +119,8 @@
 
         // Saturn with rings
         const saturnGeometry = new THREE.SphereGeometry(0.8, 32, 32);
-        const saturnMaterial = new THREE.MeshStandardMaterial({ color: 0xc8aa96e });
+        const saturnTexture = textureLoader.load('textures/preview_saturn.jpg');
+        const saturnMaterial = new THREE.MeshStandardMaterial({ map: saturnTexture });
         const saturn = new THREE.Mesh(saturnGeometry, saturnMaterial);
         saturn.position.set(5, 0, -2);
         scene.add(saturn);
@@ -250,8 +251,9 @@
         const time = Date.now() * 0.001; // Time in seconds
         moon.position.x = sphere.position.x + Math.cos(time) * 1.5; // Orbit around the sphere
         moon.position.z = sphere.position.z + Math.sin(time) * 1.5;
-        saturn.rotation.y += 0.005; // Slowly rotate Saturn
-        rings.rotation.y += 0.002; // Slowly rotate Saturn's rings
+        saturn.rotation.y += 0.015; // Slowly rotate Saturn
+        rings.rotation.x = Math.PI / 4;
+        rings.rotation.z += 0.015; // Slowly rotate Saturn's rings
         jupiter.rotation.y += 0.008; // Slowly rotate Jupiter
         cosmos.rotation.y += 0.005; // Slowly rotate the friendly robot
         cosmos.position.x = 0.002 + Math.sin(time * 2) * 0.1; // Gentle bobbing motion for the robot
