@@ -139,6 +139,14 @@
         jupiter.position.set(-4, 0, -2);
         scene.add(jupiter);
 
+        // Mars
+        const marsGeometry = new THREE.SphereGeometry(0.5, 32, 32);
+        const marsTexture = textureLoader.load('textures/preview_mars.jpg');
+        const marsMaterial = new THREE.MeshStandardMaterial({ map: marsTexture });
+        const mars = new THREE.Mesh(marsGeometry, marsMaterial);
+        mars.position.set(2, 1, -2);
+        scene.add(mars);
+
         // Cosmos - our friendly space robot!
         const cosmos = new THREE.Group();
         const cosmosBody = new THREE.Mesh(
@@ -247,6 +255,7 @@
         jupiter.rotation.y += 0.008; // Slowly rotate Jupiter
         cosmos.rotation.y += 0.005; // Slowly rotate the friendly robot
         cosmos.position.x = 0.002 + Math.sin(time * 2) * 0.1; // Gentle bobbing motion for the robot
+        mars.rotation.y += 0.008;
         
         renderer.render(scene, camera);
         }
