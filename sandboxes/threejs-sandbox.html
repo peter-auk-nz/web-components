@@ -102,10 +102,14 @@
         // Create a sphere
         const sphereGeometry = new THREE.SphereGeometry(0.5, 32, 32);
         
-        //Load Earth texture
+        //Load Earth texture 
         const textureLoader = new THREE.TextureLoader();
-        const earthTexture = textureLoader.load('https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/WorldMap-A_non-Frame.png/1280px-WorldMap-A_non-Frame.png');
-        const sphereMaterial = new THREE.MeshStandardMaterial({ map: earthTexture });
+        const earthTexture = textureLoader.load('https://threejs.org/examples/textures/planets/earth_atmos_2048.jpg');
+        const sphereMaterial = new THREE.MeshStandardMaterial({ 
+            map: earthTexture,
+            roughness: 0.8,
+            metalness: 0.1
+         });
 
         const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
         sphere.position.set(2, 0, 0); // Position the sphere to the right of the cube
@@ -126,7 +130,7 @@
         scene.add(saturn);
 
         // Saturn's ring geometry
-        const ringGeometry = new THREE.TorusGeometry(1.4, 0.2, 2, 64);
+        const ringGeometry = new THREE.TorusGeometry(1.4, 0.2, 2, 64) ;
 
         // Saturn's rings texture
         const ringTexture = textureLoader.load('textures/preview_saturn_ring.jpg');
