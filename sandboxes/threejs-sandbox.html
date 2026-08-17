@@ -56,14 +56,29 @@
         const sunTexture = textureLoader.load('textures/preview_sun.jpg');
         const sunMaterial = new THREE.MeshStandardMaterial({ 
             map: sunTexture,
-            emissive: 0xffa500,
+            color: 0xff6600,
+            emissive: 0xff4400 ,
             emissiveIntensity: 1
         });
 
         const sun = new THREE.Mesh(sunGeometry, sunMaterial);
+        sun.position.set(-8, 2, -8);
         scene.add(sun);
 
-        
+        // Sun Corona
+        const coronaGeometry = new THREE.SphereGeometry(1.8,32,32);
+        const coronaMaterial = new THREE.MeshStandardMaterial({
+            color: 0xff6600,
+            emissive: 0xff4400,
+            emissiveIntensity: 0.8,
+            transparent: true,
+            opacity: 0.6
+        });
+
+        const corona = new THREE.Mesh(coronaGeometry, coronaMaterial);
+        corona.position.set(-8, 2, -8);
+        scene.add(corona);
+
         // 3. Create a renderer (the engine that draws the scene)
         const renderer = new THREE.WebGLRenderer();
         renderer.setSize(window.innerWidth, window.innerHeight);
