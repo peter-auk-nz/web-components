@@ -15,6 +15,8 @@
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 
     <script>
+        const textureLoader = new THREE.TextureLoader(); // New texture loader
+
         // 1. Create the scene (the empty 3D world)
         const scene = new THREE.Scene();
 
@@ -34,7 +36,7 @@
         const directionalLight2 = new THREE.DirectionalLight(0xff8800, 0.5);
         directionalLight2.position.set(-5, -3, 2);
         scene.add(directionalLight2);
-
+        
         // Starfield background
         const starGeometry = new THREE.BufferGeometry();
         const starCount = 2000;
@@ -51,33 +53,17 @@
 
         // The Sun
         const sunGeometry = new THREE.SphereGeometry(1.5, 32, 32);
-        const sunMaterial = new THREE.MeshBasicMaterial({ 
-            color: 0xffa500,
+        const sunTexture = textureLoader.load('textures/preview_sun.jpg');
+        const sunMaterial = new THREE.MeshStandardMaterial({ 
+            map: sunTexture,
             emissive: 0xffa500,
             emissiveIntensity: 1
         });
+
         const sun = new THREE.Mesh(sunGeometry, sunMaterial);
         scene.add(sun);
 
-        // Sunlight
-        const sunLight = new THREE.PointLight(0xffa500, 2, 100);
-        sun.position.set(-8, 2, -8);
-        sunLight.position.set(-8, 2, -8);
-        scene.add(sunLight);
-        // Sun Corona (glowing outer layer)
-        const coronaGeometry = new THREE.SphereGeometry(1.8, 32, 32);
-        const coronaMaterial = new THREE.MeshBasicMaterial({
-            color: 0xff6600,
-            emissive: 0xff4400,
-            emissiveIntensity: 0.5,
-            transparent: true,
-            opacity: 0.3
-        });
-
-        const corona = new THREE.Mesh(coronaGeometry, coronaMaterial);
-        corona.position.set(-8, 2, -8);
-        scene.add(corona);
-
+        
         // 3. Create a renderer (the engine that draws the scene)
         const renderer = new THREE.WebGLRenderer();
         renderer.setSize(window.innerWidth, window.innerHeight);
@@ -102,8 +88,7 @@
         // Create a sphere
         const sphereGeometry = new THREE.SphereGeometry(0.5, 32, 32);
         
-        //Load Earth texture 
-        const textureLoader = new THREE.TextureLoader();
+        // Load Earth texture 
         const earthTexture = textureLoader.load('https://threejs.org/examples/textures/planets/earth_atmos_2048.jpg');
         const sphereMaterial = new THREE.MeshStandardMaterial({ 
             map: earthTexture,
