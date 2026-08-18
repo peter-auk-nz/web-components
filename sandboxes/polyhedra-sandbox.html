@@ -32,20 +32,68 @@
 
             // Tetrahedron - 4 faces
             const tetra = new THREE.Mesh(
-                new THREE.TetrahedronGeometry(1),
+                new THREE .TetrahedronGeometry(1),
                 new THREE.MeshStandardMaterial({ color: 0x667eea, wireframe: false })
-        );
-        tetra.position.set(-4, 0, 0);
-        scene.add(tetra);
+            );
+            tetra.position.set(-4, 0, 0);
+            scene.add(tetra);
 
-        function animate() {
-            requestAnimationFrame(animate);
-            controls.update();
-            tetra.rotation.x += 0.01;
-            tetra.rotation.y += 0.01;
-            renderer.render(scene, camera);
-        }
-        animate();
+            // Cube - 6 square faces
+            const cube = new THREE.Mesh(
+                new THREE.BoxGeometry(1.5, 1.5, 1.5),
+                new THREE.MeshStandardMaterial({ color: 0xff6600 })
+            );
+            cube.position.set(-2, 0, 0);
+            scene.add(cube);
+
+            // Octahedron - 8 triangular faces
+            const octa = new THREE.Mesh(
+                new THREE.OctahedronGeometry(1),
+                new THREE.MeshStandardMaterial({ color: 0x00ff88 })
+            );
+            octa.position.set(0, 0, 0);
+            scene.add(octa);
+
+            // Dodecahedron - 12 pentagonal faces
+            const dodeca = new THREE.Mesh(
+                new THREE.DodecahedronGeometry(1),
+                new THREE. MeshStandardMaterial({ color: 0xff00ff })
+            );
+            dodeca.position.set(2, 0, 0);
+            scene.add(dodeca);
+
+            // Icosahedron - 20 triangular faces
+            const icosa = new THREE.Mesh(
+                new THREE.IcosahedronGeometry(1),
+                new THREE.MeshStandardMaterial({ color: 0xffff00 })
+            );
+            icosa.position.set(4, 0, 0);
+            scene.add(icosa);
+
+            // Function Animate
+            function animate() {
+                requestAnimationFrame(animate);
+                controls.update();
+                // Tetra rotaion
+                tetra.rotation.x += 0.01;
+                tetra.rotation.y += 0.01;
+                // Cube rotation
+                cube.rotation.x += 0.008;
+                cube.rotation.y += 0.008;
+                // Octahedron rotation
+                octa.rotation.x += 0.012;
+                octa.rotation.y += 0.008;
+                // Dodeca rotation
+                dodeca.rotation.x += 0.006;
+                dodeca.rotation.y += 0.01;
+                // Icosahedron rotation
+                icosa.rotation.x += 0.015;
+                icosa.rotation.y += 0.005;
+
+                renderer.render(scene, camera);
+                
+            }
+            animate();
         </script>
     </body>
 </html>
