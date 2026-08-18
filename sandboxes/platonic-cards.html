@@ -12,15 +12,47 @@
         </head>
         <body>
             <h1>Platonic Solids</h1>
+            <!-- Tetra card -->
             <div class="cards">
                 <div class="card">
                 <canvas id="tetra"></canvas>
                 <h2>Tetrahedron</h2>
                 <p>4 triangular faces</p>
-                <p>Element of fire</p>
+                <p>🔥Element of fire</p>
+            </div>
+        
+            <!-- Cube card -->
+            <div class="card">
+                <canvas id="cube"></canvas>
+                <h2>Cube</h2>
+                <p>6 square faces</p>
+                <p>🌍Element of Earth</p>
+            </div>
+
+            <!-- Octa card -->
+            <div class="card">
+                <canvas id="octa"></canvas>
+                <h2>Octahedron</h2>
+                <p>8 triangular faces</p>
+                <p>💨Element of air</p>
+            </div>
+
+            <!-- Dodeca card -->
+            <div class="card">
+                <canvas id ="dodeca"></canvas>
+                <h2>Dodecahedron</h2>
+                <p>12 pentagonal faces</p>
+                <p>🌌Element of Cosmos</p>
+            </div>
+        
+            <!-- Icosa card -->
+            <div class="card">
+                <canvas id="icosa"></canvas>
+                <h2>Icosahedron</h2>
+                <p>20 triangular faces</p>
+                <p>💧Element of water</p>
             </div>
         </div>
-
         <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
         <script>
             function createScene(canvasId, geometry, color) {
@@ -40,6 +72,10 @@
                 animate();
             }
             createScene('tetra', new THREE.TetrahedronGeometry(1), 0x667eea);
+            createScene('cube', new THREE.BoxGeometry(1.5, 1.5, 1.5), 0xff6600);
+            createScene('octa', new THREE.OctahedronGeometry(1), 0x00ff88);
+            createScene('dodeca', new THREE.DodecahedronGeometry(1), 0xff00ff);
+            createScene('icosa', new THREE.IcosahedronGeometry(1), 0xfff00);
         </script>
     </body>
 </html>
