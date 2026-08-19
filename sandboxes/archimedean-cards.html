@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>Archimedean Solids</title>
+            <style>
+                body { font-family: sans-serif; background: #0a0a1a; color: #ffffff; padding: 2rem; }
+                h1 { text-align: center; }
+                .cards { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2rem; column-rule: 1px solid #667eea; row-rule: 1px solid #667eea; }
+                .card { text-align: center; padding: 1rem; background: rgba(102, 126, 234, 0.08); border-radius: 12px }
+            </style>
+        </head>
+        <body>
+            <h1>Archimedean Solids</h1>
+            
+            <div class="cards">
+                <div class="card">
+                <canvas id="cubocta"></canvas>
+                <h2>Cuboctahedron</h2>
+                <p>8 triangular + 6 square faces</p>
+                <p>14 faces total</p>
+            </div>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+        <script>
+            function createScene(canvasId, geometry, color) {
+                const canvas = document.getElementById(canvasId);
+                const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+                renderer.setSize(300, 200);
+                const scene = new THREE.Scene();
+                const camera = new THREE.PerspectiveCamera(75, 300 / 200, 0.1, 100);
+                camera.position.z = 3;
+                scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+                const light = new THREE.PointLight(0xffffff, 1);
+                light.position.set(5, 5, 5);
+                scene.add(light);
+                const mesh = new THREE.Mesh(geometry, new THREE.MeshStandardMaterial({ color, side: THREE.DoubleSide }));
+                scene.add(mesh);
+                
+                function animate() { requestAnimationFrame(animate); mesh.rotation.x += 0.01; mesh.rotation.y += 0.01; renderer.render(scene, camera); }
+                animate();
+            }
+            // Cuboctahedron
+            const cuboctaVertices = [
+                1, 1, 0,    -1, 1, 0,   1, -1, 0,   -1, -1, 0,
+                1, 0, 1,    -1, 0, 1,   1, 0, -1,   -1, 0, -1,
+                0, 1, 1,    0, -1, 1,   0, 1, -1,   0, -1, -1,
+            ];
+
+            const cuboctaFaces = [
+                0, 2, 4,    0, 8, 1,    0, 4, 8,
+                1, 8, 5,    1, 5, 7,    1, 7, 10,
+                2, 9, 4,    2, 3, 9,    2, 11, 3,
+                3, 11, 7,   3, 7, 5,    3, 5, 9,
+                4, 5, 8,    4, 9, 5,    
+                6, 10, 0,   6, 0, 2,    6, 2, 11,   6, 11, 10,
+                7, 11, 6,   8, 10, 1,   9, 3, 5,    10, 6, 1, 
+                0, 6, 2  
+            ];
+            createScene('cubocta', new THREE.PolyhedronGeometry(cuboctaVertices, cuboctaFaces, 1, 0,), 0x667eea)
+            
+        </script>
+    </body>
+</html>
