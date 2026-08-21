@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+            <meta charset="UTF-8">
+            <title>Geometry Sandbox</title>
+        <style>
+            body { margin: 0; background: #0a0a1a }
+        </style>
+    </head>
+    <body>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+        <script>
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 100);
+            camera.position.z = 3;
+
+            const renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+
+            // ONE TRIANGLE
+            // Three vertices - each is x, y, z
+
+            const vertices = new Float32Array([
+                0, 2, 1, // vertex 0 - top (x = 0, y = 1, z = 0 )
+                -1, -1, 0, // vertex 1 - bottom left (x = 1, y = 1, z = 0)
+                -2, -1, 0, // vertex 2 - bottom right (x = 1, y = -1, z = 0)
+            ]);
+            const geometry = new THREE.BufferGeometry();
+            geometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
+
+            const material = new THREE.MeshBasicMaterial({ color: 0x667eea, side: THREE.DoubleSide });
+            const triangle = new THREE.Mesh(geometry, material);
+            scene.add(triangle);
+
+            function animate() {
+                requestAnimationFrame(animate);
+                triangle.rotation.y += 0.01;
+                renderer.render(scene, camera);
+            }
+            animate();
+        </script>
+    </body>
+</html>
