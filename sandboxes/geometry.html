@@ -9,6 +9,7 @@
     </head>
     <body>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
         <script>
             const scene = new THREE.Scene();
             const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 100);
@@ -16,9 +17,11 @@
 
             const renderer = new THREE.WebGLRenderer({ antialias: true });
             renderer.setSize(window.innerWidth, window.innerHeight);
+            const controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
             document.body.appendChild(renderer.domElement);
 
-            // Triangle 1 — blue
+            // Triangle 1 — light grey
             // Three vertices - each is x, y, z
             const vertices1 = new Float32Array([
             -1, 1, 0, // vertex 0 - top (x = 0, y = 1, z = 0 )
@@ -32,7 +35,7 @@
             scene.add(tri1);
             
 
-            // Triangle 2 — orange
+            // Triangle 2 — light grey
             const vertices2 = new Float32Array([
                 -1, 1, 0, // Top left
                 1, -1, 0, // bottom right
@@ -70,8 +73,8 @@
 
             // Triangle 5 — purple — left face
             const vertices5 = new Float32Array([
-                1, -1, 0, // bottom left
-                1, 1, 0, // top left
+                -1, 1, 0, // bottom left
+                -1, -1, 0, // top left
                 0, 0, 2, // apex
             ]);
             const geo5 = new THREE.BufferGeometry();
@@ -94,21 +97,8 @@
 
             function animate() {
                 requestAnimationFrame(animate);
-                // y axis
-                tri1.rotation.y += 0.01;
-                tri2.rotation.y += 0.01;
-                tri3.rotation.y += 0.01;
-                tri4.rotation.y += 0.01;
-                tri5.rotation.y += 0.01;
-                tri6.rotation.y += 0.01;
-                // x axis
-                tri1.rotation.x += 0.01;
-                tri2.rotation.x += 0.01;
-                tri3.rotation.x += 0.01;
-                tri4.rotation.x += 0.01;
-                tri5.rotation.x += 0.01;
-                tri6.rotation.x += 0.01;
                 renderer.render(scene, camera);
+                controls.update();
             }
             animate();
         </script>
