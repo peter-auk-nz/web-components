@@ -18,27 +18,36 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
             document.body.appendChild(renderer.domElement);
 
-            // ONE TRIANGLE
+            // Triangle 1 — blue
             // Three vertices - each is x, y, z
-            const vertices = new Float32Array([
-                -1, 1, 0, // vertex 0 - top (x = 0, y = 1, z = 0 )
-                -1, -1, 0, // vertex 1 - bottom left (x = 1, y = 1, z = 0)
-                1, -1, 0, // vertex 2 - bottom right (x = 1, y = -1, z = 0)
-                // Second triangle
-                -1, 1, 0,
-                1, -1, 0,
-                1, 1, 0
+            const vertices1 = new Float32Array([
+            -1, 1, 0, // vertex 0 - top (x = 0, y = 1, z = 0 )
+            -1, -1, 0, // vertex 1 - bottom left (x = 1, y = 1, z = 0)
+            1, -1, 0, // vertex 2 - bottom right (x = 1, y = -1, z = 0)
             ]);
-            const geometry = new THREE.BufferGeometry();
-            geometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
+            const geo1 = new THREE.BufferGeometry();
+            geo1.setAttribute('position', new THREE.BufferAttribute(vertices1, 3));
+            const mat1 = new THREE.MeshBasicMaterial({ color: 0x32CD32, side: THREE.DoubleSide });
+            const tri1 = new THREE.Mesh(geo1, mat1);
+            scene.add(tri1);
+            
 
-            const material = new THREE.MeshBasicMaterial({ color: 0x667eea, side: THREE.DoubleSide });
-            const triangle = new THREE.Mesh(geometry, material);
-            scene.add(triangle);
+            // Triangle 2 — orange
+            const vertices2 = new Float32Array([
+            -1, 1, 0, // Top left
+            1, -1, 0, // bottom right
+            1, 1, 0 // top right
+            ]);
+            const geo2 = new THREE.BufferGeometry();
+            geo2.setAttribute('position', new THREE.BufferAttribute(vertices2, 3));
+            const mat2 = new THREE.MeshBasicMaterial({ color: 0xff6600, side: THREE.DoubleSide });
+            const tri2 = new THREE.Mesh(geo2, mat2);
+            scene.add(tri2);
 
             function animate() {
                 requestAnimationFrame(animate);
-                triangle.rotation.y += 0.01;
+                tri1.rotation.y += 0.01;
+                tri2.rotation.y += 0.01;
                 renderer.render(scene, camera);
             }
             animate();
