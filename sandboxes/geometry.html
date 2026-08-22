@@ -26,28 +26,88 @@
             1, -1, 0, // vertex 2 - bottom right (x = 1, y = -1, z = 0)
             ]);
             const geo1 = new THREE.BufferGeometry();
-            geo1.setAttribute('position', new THREE.BufferAttribute(vertices1, 3));
-            const mat1 = new THREE.MeshBasicMaterial({ color: 0x32CD32, side: THREE.DoubleSide });
-            const tri1 = new THREE.Mesh(geo1, mat1);
+                geo1.setAttribute('position', new THREE.BufferAttribute(vertices1, 3));
+                const mat1 = new THREE.MeshBasicMaterial({ color: 0xdcdcdc2, side: THREE.DoubleSide });
+                const tri1 = new THREE.Mesh(geo1, mat1);
             scene.add(tri1);
             
 
             // Triangle 2 — orange
             const vertices2 = new Float32Array([
-            -1, 1, 0, // Top left
-            1, -1, 0, // bottom right
-            1, 1, 0 // top right
+                -1, 1, 0, // Top left
+                1, -1, 0, // bottom right
+                1, 1, 0 // top right
             ]);
             const geo2 = new THREE.BufferGeometry();
-            geo2.setAttribute('position', new THREE.BufferAttribute(vertices2, 3));
-            const mat2 = new THREE.MeshBasicMaterial({ color: 0xff6600, side: THREE.DoubleSide });
-            const tri2 = new THREE.Mesh(geo2, mat2);
-            scene.add(tri2);
+                geo2.setAttribute('position', new THREE.BufferAttribute(vertices2, 3));
+                const mat2 = new THREE.MeshBasicMaterial({ color: 0xdcdcdc2, side: THREE.DoubleSide });
+                const tri2 = new THREE.Mesh(geo2, mat2);
+                scene.add(tri2);
+
+            // Triangle 3 — red — rising face
+            const vertices3 = new Float32Array([
+                -1, -1, 0, // bottom left (on the base)
+                1, -1, 0, // bottom right (on the base)
+                0, 0, 2, // apex — pointing OUT toward you!
+            ]);
+            const geo3 = new THREE.BufferGeometry();
+                geo3.setAttribute('position', new THREE.BufferAttribute(vertices3, 3));
+                const mat3 = new THREE.MeshBasicMaterial({ color: 0xff0000, side: THREE.DoubleSide });
+                const tri3 = new THREE.Mesh(geo3, mat3);
+            scene.add(tri3);
+
+            // Triangle 4 — yellow — back face
+            const vertices4 = new Float32Array([
+                -1, 1, 0, // top left (base)
+                1, 1, 0, // top right (base)
+                0, 0, 2, // apex
+            ]);
+            const geo4 = new THREE.BufferGeometry();
+                geo4.setAttribute('position', new THREE.BufferAttribute(vertices4, 3));
+                const mat4 = new THREE.MeshBasicMaterial({ color: 0xffff00, side: THREE.DoubleSide });
+                const tri4 = new THREE.Mesh(geo4, mat4);
+            scene.add(tri4);
+
+            // Triangle 5 — purple — left face
+            const vertices5 = new Float32Array([
+                1, -1, 0, // bottom left
+                1, 1, 0, // top left
+                0, 0, 2, // apex
+            ]);
+            const geo5 = new THREE.BufferGeometry();
+                geo5.setAttribute('position', new THREE.BufferAttribute(vertices5, 3));
+                const mat5 = new THREE.MeshBasicMaterial({ color: 0xff00ff, side: THREE.DoubleSide });
+                const tri5 = new THREE.Mesh(geo5, mat5);
+            scene.add(tri5);
+
+            // Triangle 6 — white — right face
+            const vertices6 = new Float32Array([
+                1, -1, 0, // bottom right
+                1, 1, 0, // top right
+                0, 0, 2, // apex
+            ]);
+            const geo6 = new THREE.BufferGeometry();
+                geo6.setAttribute('position', new THREE.BufferAttribute(vertices6, 3));
+                const mat6 = new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide });
+                const tri6 = new THREE.Mesh(geo6, mat6);
+            scene.add(tri6);
 
             function animate() {
                 requestAnimationFrame(animate);
+                // y axis
                 tri1.rotation.y += 0.01;
                 tri2.rotation.y += 0.01;
+                tri3.rotation.y += 0.01;
+                tri4.rotation.y += 0.01;
+                tri5.rotation.y += 0.01;
+                tri6.rotation.y += 0.01;
+                // x axis
+                tri1.rotation.x += 0.01;
+                tri2.rotation.x += 0.01;
+                tri3.rotation.x += 0.01;
+                tri4.rotation.x += 0.01;
+                tri5.rotation.x += 0.01;
+                tri6.rotation.x += 0.01;
                 renderer.render(scene, camera);
             }
             animate();
