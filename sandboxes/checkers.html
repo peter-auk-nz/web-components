@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Checkers</title>
+        <style>
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                margin: 0;
+                background: #1a1a2e;
+            }
+
+            .board {
+                display: grid;
+                grid-template-columns: repeat(8, 70px);
+                grid-template-rows: reapeat(8, 70px);
+                border: 3px solid #ffd700;
+            }
+
+            .square {
+                width: 70px;
+                height: 70px;
+            }
+
+            .light { background: #f0d9b5; }
+            .dark { background: #b58863; }
+
+            .piece {
+                width: 54px;
+                height: 54px;
+                border-radius: 50%;
+                margin: 8px auto;
+                border: 3px solid rgba(0, 0, 0, 0, 3);
+            }
+            
+            .red { background: radial-gradient(circle at 35% 35%, #ff6b6b, #c0392b); }
+            .green { background: radial-gradient(circle at 35% 35%, #55efc4, #00b894); }
+        </style>
+    </head>
+    <body>
+        <div class="board" id="board"></div>
+
+        <script>
+            const board = document.getElementById('board');
+
+            for (let row  = 0; row < 8; row++) {
+                for (let col = 0; col < 8; col++) {
+                    const square = document.createElement('div');
+                    square.classList.add('square');
+                    const isDark = (row + col) % 2 !== 0;
+                    square.classList.add(isDark ? 'dark' : 'light');
+                    
+            
+            // Add pieces on dark squares
+            if (isDark && row < 3) {
+                const piece = document.createElement('div');
+                piece.classList.add('piece', 'red');
+                square.appendChild(piece);
+            }
+            if (isDark && row > 4) {
+                const piece = document.createElement('div');
+                piece.classList.add('piece', 'green');
+                square.appendChild(piece);
+            }
+
+            board.appendChild(square);
+            }
+        }    
+        </script>
+    </body>
+</html>
