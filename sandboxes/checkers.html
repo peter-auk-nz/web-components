@@ -35,9 +35,12 @@
                 margin: 8px auto;
                 border: 3px solid rgba(0, 0, 0, 0, 3);
             }
-            
+
             .red { background: radial-gradient(circle at 35% 35%, #ff6b6b, #c0392b); }
             .green { background: radial-gradient(circle at 35% 35%, #55efc4, #00b894); }
+
+            .selected { outline: 3px solid yellow; }
+            .square { cursor: pointer; }
         </style>
     </head>
     <body>
@@ -45,16 +48,15 @@
 
         <script>
             const board = document.getElementById('board');
+            let selectedSquare = null;
 
-            for (let row  = 0; row < 8; row++) {
+            for (let row = 0; row < 8; row++) {
                 for (let col = 0; col < 8; col++) {
-                    const square = document.createElement('div');
-                    square.classList.add('square');
-                    const isDark = (row + col) % 2 !== 0;
-                    square.classList.add(isDark ? 'dark' : 'light');
-                    
-            
-            // Add pieces on dark squares
+                const square = document.createElement('div');
+                square.classList.add('square');
+                const isDark = (row + col) % 2 !== 0;
+                square.classList.add(isDark ? 'dark' : 'light');
+
             if (isDark && row < 3) {
                 const piece = document.createElement('div');
                 piece.classList.add('piece', 'red');
@@ -66,9 +68,22 @@
                 square.appendChild(piece);
             }
 
+            square.addEventListener('click', () => {
+                const piece = square.queryselector('.piece');
+                if (selectedSquare) {
+                    selectedSquare.classList.remove('selected');
+                    selectedSquare = null;
+                }
+                if (piece) {
+                    square.classList.add('selected');
+                    selectedSquare = square;
+                }
+            });
+
             board.appendChild(square);
+
             }
-        }    
+        }   
         </script>
     </body>
 </html>
