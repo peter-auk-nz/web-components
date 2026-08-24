@@ -84,23 +84,25 @@
                 
 
                 if (selectedSquare && !piece && isDark) {
-                    const movingPiece = selectedSquare.querySelector('piece');
+                    const movingPiece = selectedSquare.querySelector('.piece');
                     
                     // Check it's the right player's piece
-                    if (movingPiece && movingPiece.classlist.contains(currentPlayer === 'orange' ? 'red' : 'green')) {
+                    if (movingPiece && movingPiece.classList.contains(currentPlayer === 'red' ? 'red' : 'green')) {
                         square.appendChild(movingPiece);
                         selectedSquare.classList.remove('selected');
                         selectedSquare = null;
                         // Switch turns
-                        currentPlayer === 'orange' ? 'red' : 'green';
+                        currentPlayer = currentPlayer === 'red' ? 'green' : 'red';
+                    }
+
+                } else if (piece) {
+                    if (selectedSquare) {
+                        selectedSquare.classList.remove('selected');
                     }
                 }
-                    
                     square.classList.add('selected');
                     selectedSquare = square;
-                    
-                
-            });
+                });
 
             board.appendChild(square);
 
