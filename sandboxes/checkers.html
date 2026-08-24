@@ -59,6 +59,7 @@
         <script>
             const board = document.getElementById('board');
             let selectedSquare = null;
+            let currentPlayer = 'red';
 
             for (let row = 0; row < 8; row++) {
                 for (let col = 0; col < 8; col++) {
@@ -80,20 +81,25 @@
 
             square.addEventListener('click', () => {
                 const piece = square.querySelector('.piece');
+                
 
                 if (selectedSquare && !piece && isDark) {
-                    // Move the piece
-                    const movingPiece = selectedSquare.querySelector('.piece');
-                    square.appendChild(movingPiece);
-                    selectedSquare.classList.remove('selected');
-                    selectedSquare = null;
-                } else if (piece) {
-                    if (selectedSquare) {
+                    const movingPiece = selectedSquare.querySelector('piece');
+                    
+                    // Check it's the right player's piece
+                    if (movingPiece && movingPiece.classlist.contains(currentPlayer === 'orange' ? 'red' : 'green')) {
+                        square.appendChild(movingPiece);
                         selectedSquare.classList.remove('selected');
+                        selectedSquare = null;
+                        // Switch turns
+                        currentPlayer === 'orange' ? 'red' : 'green';
                     }
+                }
+                    
                     square.classList.add('selected');
                     selectedSquare = square;
-                }
+                    
+                
             });
 
             board.appendChild(square);
