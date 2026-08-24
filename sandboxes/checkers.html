@@ -80,11 +80,17 @@
 
             square.addEventListener('click', () => {
                 const piece = square.querySelector('.piece');
-                if (selectedSquare) {
+
+                if (selectedSquare && !piece && isDark) {
+                    // Move the piece
+                    const movingPiece = selectedSquare.querySelector('.piece');
+                    square.appendChild(movingPiece);
                     selectedSquare.classList.remove('selected');
                     selectedSquare = null;
-                }
-                if (piece) {
+                } else if (piece) {
+                    if (selectedSquare) {
+                        selectedSquare.classList.remove('selected');
+                    }
                     square.classList.add('selected');
                     selectedSquare = square;
                 }
