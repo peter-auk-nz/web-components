@@ -18,6 +18,8 @@
                 grid-template-columns: repeat(8, 70px);
                 grid-template-rows: reapeat(8, 70px);
                 border: 3px solid #ffd700;
+                gap: 2px;
+                background: #333333
             }
 
             .square {
@@ -39,8 +41,16 @@
             .red { background: radial-gradient(circle at 35% 35%, #ff6b6b, #c0392b); }
             .green { background: radial-gradient(circle at 35% 35%, #55efc4, #00b894); }
 
-            .selected { outline: 3px solid yellow; }
-            .square { cursor: pointer; }
+            .selected { border: 4px solid yellow; }
+            
+            .square {  
+                width: 70px;
+                height: 70px;
+                box-sizing: border-box;
+                cursor: pointer;
+            }
+
+
         </style>
     </head>
     <body>
@@ -69,7 +79,7 @@
             }
 
             square.addEventListener('click', () => {
-                const piece = square.queryselector('.piece');
+                const piece = square.querySelector('.piece');
                 if (selectedSquare) {
                     selectedSquare.classList.remove('selected');
                     selectedSquare = null;
