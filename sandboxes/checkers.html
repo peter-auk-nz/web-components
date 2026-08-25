@@ -50,11 +50,33 @@
                 cursor: pointer;
             }
 
+            .game {
+                display: flex;
+                gap: 2rem;
+                align-items: flex-start;
+            }
 
+            .sidebar {
+                background: rgba(255,255,255,0.1 );
+                padding: 1rem;
+                border-radius: 8px;
+                color: white;
+                min-width: 100px;
+                text-align: center;
+            }
         </style>
     </head>
     <body>
-        <div class="board" id="board"></div>
+        <div class="game">
+            <div class="sidebar">
+                <h3>🟠Orange</h3>
+                <div id="orange-captured"></div>
+                <h3>🟢Green</h3>
+                <div id="green-captured"></div>
+            </div>
+            <div class="board" id="board"></div>
+        </div>
+
 
         <script>
             const board = document.getElementById('board');
@@ -83,11 +105,20 @@
                 const piece = square.querySelector('.piece');
                 
 
-                if (selectedSquare && !piece && isDark) {
+                if (selectedSquare && isDark) {
                     const movingPiece = selectedSquare.querySelector('.piece');
                     
                     // Check it's the right player's piece
                     if (movingPiece && movingPiece.classList.contains(currentPlayer === 'red' ? 'red' : 'green')) {
+                        // Check if there's an opponent piece to capture
+                        const opponentPiece = square.querySelector('.piece');
+                        if (opponentPiece) {
+                            const captureDiv = getElementById(currentPlayer === 'red' ? 'orange-captured' : 'green-captured');
+                            const cap = document.createElement('div');
+                            cap.classList.add('piece', opponentPiece.classList.contains('red') ? 'red' : 'green');
+                            capturedDiv.appendChild(cap);
+                            opponentPiece.remove();
+                        }
                         square.appendChild(movingPiece);
                         selectedSquare.classList.remove('selected');
                         selectedSquare = null;
