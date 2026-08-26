@@ -33,5 +33,31 @@
 
         <h2>Launch Notes</h2>
         <p>To be updated as events unfold...</p>
+
+        <div class="countdown" id="countdown"></div>
+
+        <script>
+            const launch = new Date('2026-08-30T23:26:00+12:00');
+
+            function updateCountdown() {
+                const now = new Date();
+                const diff = launch - now;
+
+                    if (diff <= 0) {
+                        document.getElementById('countdown').innerHTML = 'Roman has launched!';
+                        return;
+                    }
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 *24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                document.getElementById('countdown').innerHTML =
+                    `Launch in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+                    setTimeout(updateCountdown, 1000);
+                }
+                updateCountdown();
+        </script>
     </body>
 </html>
