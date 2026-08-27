@@ -58,3 +58,9 @@ a:hover { color: rgb(40, 40, 43); }
 
 ul { line-height: 2; }
 
+.profile {
+    background: rgba(128, 128, 131, 0.1);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
