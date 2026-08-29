@@ -70,9 +70,9 @@
         <div class="game">
             <div class="sidebar">
                 <h3>🟠Orange</h3>
-                <div id="orange-captured"></div>
+                <div id="orange-capture"></div>
                 <h3>🟢Green</h3>
-                <div id="green-captured"></div>
+                <div id="green-capture"></div>
             </div>
             <div class="board" id="board"></div>
         </div>
@@ -104,8 +104,7 @@
             square.addEventListener('click', () => {
                 const piece = square.querySelector('.piece');
                 
-
-                if (selectedSquare && isDark) {
+                    if (selectedSquare && isDark) {
                     const movingPiece = selectedSquare.querySelector('.piece');
                     
                     // Check it's the right player's piece
@@ -113,10 +112,10 @@
                         // Check if there's an opponent piece to capture
                         const opponentPiece = square.querySelector('.piece');
                         if (opponentPiece) {
-                            const captureDiv = getElementById(currentPlayer === 'red' ? 'orange-captured' : 'green-captured');
+                            const captureDiv = document.getElementById(currentPlayer === 'red' ? 'orange-capture' : 'green-capture');
                             const cap = document.createElement('div');
                             cap.classList.add('piece', opponentPiece.classList.contains('red') ? 'red' : 'green');
-                            capturedDiv.appendChild(cap);
+                            captureDiv.appendChild(cap);
                             opponentPiece.remove();
                         }
                         square.appendChild(movingPiece);
@@ -130,9 +129,9 @@
                     if (selectedSquare) {
                         selectedSquare.classList.remove('selected');
                     }
-                }
                     square.classList.add('selected');
                     selectedSquare = square;
+                    }
                 });
 
             board.appendChild(square);
