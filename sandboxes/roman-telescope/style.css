@@ -24,6 +24,11 @@ h2 { font-size: 1.6rem; margin-top: 2rem;}
     margin: 2rem 0;
 }
 
+.launch-info a {
+    color: white;
+    text-decoration: underline;
+}
+
 blockquote {
     border-left: 4px solid rgb(128, 128, 131);
     margin: 2rem 0;
