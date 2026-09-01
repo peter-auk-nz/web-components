@@ -10,10 +10,19 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
-            column-rule: 1px dotted #667eea; /* Column rule for visual separation */
+            /* Gap decorations - fully supported Chrome/Edge 149+ August 2026 */
+            column-rule: 1px dotted #667eea; 
             row-rule: 1px dotted #ff6600; /* Row rule for visual separation */
         }
 
+        /* New shorthand - sets both row and column rule at once */
+        /* rule: 1px dotted #667eea; */
+        
+        /* New - hide rules next to empty cells */
+        /* rule-visibility-items: around; */
+
+        /* New - neat joins where the rules cross */
+        /* rule-inset: overlap-join; */
         .item {
             background: #fff;
             padding: 1.5rem;
