@@ -32,13 +32,13 @@
                 geo1.setAttribute('position', new THREE.BufferAttribute(vertices1, 3));
                 const mat1 = new THREE.MeshBasicMaterial({ color: 0xdcdcdc2, side: THREE.DoubleSide });
                 const tri1 = new THREE.Mesh(geo1, mat1);
-                const wire = new THREE.WireframeGeometry(geo1);
-                const line = new THREE.LineSegments(wire, new THREE.LineBasicMaterial({ color: 0xffffff }));
-            scene.add(line);
+                const wire1 = new THREE.WireframeGeometry(geo1);
+                const line1 = new THREE.LineSegments(wire1, new THREE.LineBasicMaterial({ color: 0x000000 }))
             scene.add(tri1);
-            
+            scene.add(line1);
 
             // Triangle 2 — light grey
+            // Three vertices - each is x, y, z
             const vertices2 = new Float32Array([
                 -1, 1, 0, // Top left
                 1, -1, 0, // bottom right
@@ -48,8 +48,11 @@
                 geo2.setAttribute('position', new THREE.BufferAttribute(vertices2, 3));
                 const mat2 = new THREE.MeshBasicMaterial({ color: 0xdcdcdc2, side: THREE.DoubleSide });
                 const tri2 = new THREE.Mesh(geo2, mat2);
-                scene.add(tri2);
-
+                const wire2 = new THREE.WireframeGeometry(geo2);
+                const line2 = new THREE.LineSegments(wire2, new THREE.LineBasicMaterial({ color: 0x000000})) // Triangle 1 — light grey
+            scene.add(tri2);
+            scene.add(line2);
+            
             // Triangle 3 — red — rising face
             const vertices3 = new Float32Array([
                 -1, -1, 0, // bottom left (on the base)
@@ -60,8 +63,11 @@
                 geo3.setAttribute('position', new THREE.BufferAttribute(vertices3, 3));
                 const mat3 = new THREE.MeshBasicMaterial({ color: 0xff0000, side: THREE.DoubleSide });
                 const tri3 = new THREE.Mesh(geo3, mat3);
-            scene.add(tri3);
-
+                const wire3 = new THREE.WireframeGeometry(geo3);
+                const line3 = new THREE.LineSegments(wire3, new THREE.LineBasicMaterial({ color: 0x000000}))
+                scene.add(tri3);
+                scene.add(line3);
+            
             // Triangle 4 — yellow — back face
             const vertices4 = new Float32Array([
                 -1, 1, 0, // top left (base)
@@ -72,8 +78,12 @@
                 geo4.setAttribute('position', new THREE.BufferAttribute(vertices4, 3));
                 const mat4 = new THREE.MeshBasicMaterial({ color: 0xffff00, side: THREE.DoubleSide });
                 const tri4 = new THREE.Mesh(geo4, mat4);
-            scene.add(tri4);
+                const wire4 = new THREE.WireframeGeometry(geo4);
+                const line4 = new THREE.LineSegments(wire4, new THREE.LineBasicMaterial({ color: 0x000000}))
+                scene.add(tri4);
+                scene.add(line4);
 
+            
             // Triangle 5 — purple — left face
             const vertices5 = new Float32Array([
                 -1, 1, 0, // bottom left
@@ -84,7 +94,10 @@
                 geo5.setAttribute('position', new THREE.BufferAttribute(vertices5, 3));
                 const mat5 = new THREE.MeshBasicMaterial({ color: 0xff00ff, side: THREE.DoubleSide });
                 const tri5 = new THREE.Mesh(geo5, mat5);
+                const wire5 = new THREE.WireframeGeometry(geo5);
+                const line5 = new THREE.LineSegments(wire5, new THREE.LineBasicMaterial({ color: 0x000000}))
             scene.add(tri5);
+            scene.add(line5);
 
             // Triangle 6 — white — right face
             const vertices6 = new Float32Array([
@@ -96,7 +109,10 @@
                 geo6.setAttribute('position', new THREE.BufferAttribute(vertices6, 3));
                 const mat6 = new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide });
                 const tri6 = new THREE.Mesh(geo6, mat6);
+                const wire6 = new THREE.WireframeGeometry(geo6);
+                const line6 = new THREE.LineSegments(wire6, new THREE.LineBasicMaterial({ color: 0x000000}))
             scene.add(tri6);
+            scene.add(line6);
 
             function animate() {
                 requestAnimationFrame(animate);
