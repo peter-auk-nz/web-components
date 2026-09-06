@@ -87,6 +87,8 @@
                 for (let col = 0; col < 8; col++) {
                 const square = document.createElement('div');
                 square.classList.add('square');
+                square.dataset.row = row;
+                square.dataset.col = col;
                 const isDark = (row + col) % 2 !== 0;
                 square.classList.add(isDark ? 'dark' : 'light');
 
@@ -108,14 +110,26 @@
                 
                 // Check it's the right player's piece
                 if (selectedSquare && isDark) {
-                    if (selectedSquare && movingPiece.classList.contains(currentPlayer)) {                  
-                    
-                //Can't move to a square with your own piece
-                        if (piece && piece.classList.contains(currentPlayer)) {
-                            selectedSquare.classList.remove('selected');
-                            selectedSquare = null;
-                            return;
-                        }
+                    if (selectedSquare && movingPiece.classList.contains(currentPlayer)) { 
+
+                const fromRow =  parseInt(selectedSquare.dataset.row);
+                const fromCol =  parseInt(selectedSquare.dataset.col);
+                const toRow = parseInt(square.dataset.row);
+                const toCol = parseInt(square.dataset.col);
+
+                const rowDiff = toRow - fromRow;
+                const colDiff = Math.abs(toCol - fromCol);
+
+                if (colDiff !== 1 || Math.abs(rowDiff) !== 1) return;  // Invalid move: must move diagonally by one square.
+                if (currentPlayer === 'red' && rowDiff !== 1) return; // Red pieces can only move downwards
+                if (currentPlayer === 'green' && rowDiff !== -1) return;
+                
+                // Can't move to a square with your own piece
+                if (piece && piece.classList.contains(currentPlayer)) {
+                        selectedSquare.classList.remove('selected');
+                    selectedSquare = null;
+                        return;
+                    }
 
                         // Capture opponent piece if present
                         if (piece && !piece.classList.contains(currentPlayer)) {
