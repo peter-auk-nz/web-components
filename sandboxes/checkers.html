@@ -102,42 +102,57 @@
             }
 
             square.addEventListener('click', () => {
+                console.log('Square clicked!', isDark, currentPlayer);
                 const piece = square.querySelector('.piece');
+                const movingPiece = selectedSquare ? selectedSquare.querySelector('.piece') : null;
                 
-                    if (selectedSquare && isDark) {
-                    const movingPiece = selectedSquare.querySelector('.piece');
+                // Check it's the right player's piece
+                if (selectedSquare && isDark) {
+                    if (selectedSquare && movingPiece.classList.contains(currentPlayer)) {                  
                     
-                    // Check it's the right player's piece
-                    if (movingPiece && movingPiece.classList.contains(currentPlayer === 'red' ? 'red' : 'green')) {
-                        // Check if there's an opponent piece to capture
-                        const opponentPiece = square.querySelector('.piece');
-                        if (opponentPiece) {
+                //Can't move to a square with your own piece
+                        if (piece && piece.classList.contains(currentPlayer)) {
+                            selectedSquare.classList.remove('selected');
+                            selectedSquare = null;
+                            return;
+                        }
+
+                        // Capture opponent piece if present
+                        if (piece && !piece.classList.contains(currentPlayer)) {
+                            console.log('Capturing piece!', piece);
+                            console.log('Found opponent piece to capture:', piece);
                             const captureDiv = document.getElementById(currentPlayer === 'red' ? 'orange-capture' : 'green-capture');
                             const cap = document.createElement('div');
-                            cap.classList.add('piece', opponentPiece.classList.contains('red') ? 'red' : 'green');
+                            cap.classList.add('piece', piece.classList.contains('red') ? 'red' : 'green');
                             captureDiv.appendChild(cap);
-                            opponentPiece.remove();
+                            piece.remove();
                         }
+                        
+                        // Move the piece
                         square.appendChild(movingPiece);
                         selectedSquare.classList.remove('selected');
                         selectedSquare = null;
                         // Switch turns
                         currentPlayer = currentPlayer === 'red' ? 'green' : 'red';
+                        return;
                     }
-
-                } else if (piece) {
+                }
+                    // Select a piece if it's the current player's turn
                     if (selectedSquare) {
                         selectedSquare.classList.remove('selected');
+                        selectedSquare = null;
                     }
-                    square.classList.add('selected');
-                    selectedSquare = square;
+                    if (piece && piece.classList.contains(currentPlayer)) {
+                        square.classList.add('selected');
+                        selectedSquare = square;
                     }
                 });
 
             board.appendChild(square);
 
+                }
             }
-        }   
+          
         </script>
     </body>
 </html>
