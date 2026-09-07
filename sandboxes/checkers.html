@@ -120,27 +120,29 @@
                 const rowDiff = toRow - fromRow;
                 const colDiff = Math.abs(toCol - fromCol);
 
-                if (colDiff !== 1 || Math.abs(rowDiff) !== 1) return;  // Invalid move: must move diagonally by one square.
-                if (currentPlayer === 'red' && rowDiff !== 1) return; // Red pieces can only move downwards
-                if (currentPlayer === 'green' && rowDiff !== -1) return;
-                
-                // Can't move to a square with your own piece
-                if (piece && piece.classList.contains(currentPlayer)) {
-                        selectedSquare.classList.remove('selected');
-                    selectedSquare = null;
-                        return;
+                // Directon check
+                if (currentPlayer === 'red' && rowDiff < 0) return;
+                if (currentPlayer === 'green' && rowDiff > 0) return;
+
+                // Must be diagonal
+                if (colDiff !== 1 && colDiff !== 2) return;
+                        if (piece) return; // Can't move to a square that already has a piece
                     }
 
-                        // Capture opponent piece if present
-                        if (piece && !piece.classList.contains(currentPlayer)) {
-                            console.log('Capturing piece!', piece);
-                            console.log('Found opponent piece to capture:', piece);
-                            const captureDiv = document.getElementById(currentPlayer === 'red' ? 'orange-capture' : 'green-capture');
-                            const cap = document.createElement('div');
-                            cap.classList.add('piece', piece.classList.contains('red') ? 'red' : 'green');
-                            captureDiv.appendChild(cap);
-                            piece.remove();
-                        }
+                // Check for a jump
+                if (colDiff === 2) {
+                    if (piece) return; // landing square must be empty
+                    const midRow = (fromRow + toRow) / 2;
+                    const midCol = (fromCol + toCol) / 2;
+                    const midSquare = document.querySelector(`.square[data-row="${midRow}"][data-col="${midCol}"]`);
+                    const midPiece = midSquare ? midSquare.querySelector('.piece') : null;
+                    if (!midPiece || midPiece.classList.contains(currentPlayer)) return; // Must jump over an opponent's piece
+                    const captureDiv = document.getElementById(currentPlayer === 'red' ? 'orange-capture' : 'green-capture');
+                    const cap = document.createElement('div');
+                    cap.classList.add('piece', midPiece.classList.contains('red') ? 'red' : 'green');
+                    captureDiv.appendChild(cap);
+                    midPiece.remove(); // Remove the captured piece
+                }
                         
                         // Move the piece
                         square.appendChild(movingPiece);
@@ -150,7 +152,7 @@
                         currentPlayer = currentPlayer === 'red' ? 'green' : 'red';
                         return;
                     }
-                }
+               
                     // Select a piece if it's the current player's turn
                     if (selectedSquare) {
                         selectedSquare.classList.remove('selected');
