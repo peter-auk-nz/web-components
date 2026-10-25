@@ -40,9 +40,11 @@ ul {
 li {
     padding: 0.4rem 0;
     border-bottom: 1px solid rgba(128, 128, 131, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 li input[type="checkbox"] {
-    margin-right: 0.5rem;
-    vertical-align: middle;
+    flex-shrink: 0;
 }
